@@ -1,0 +1,26 @@
+{
+  "name": "mesour/modal",
+  "description": "Mesour Modal component.",
+  "license": ["BSD-3-Clause","GPL-2.0","GPL-3.0"],
+  "keywords": ["popup","modal","component","mesour"],
+  "homepage": "http://components.mesour.com/component/modal",
+  "authors": [{
+      "name": "Matouš Němec",
+      "homepage": "http://mesour.com"
+    }],
+  "require": {
+    "php": ">=5.5.0",
+    "mesour/components": "3.0.*@beta",
+    "mesour/button": "3.0.*@beta"
+  },
+  "require-dev": {
+    "tracy/tracy": "~2.3.0"
+  },
+  "minimum-stability": "beta",
+  "prefer-stable": true,
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  }
+}
