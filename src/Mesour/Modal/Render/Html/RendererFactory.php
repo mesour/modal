@@ -27,4 +27,5 @@ class RendererFactory implements Render\IRendererFactory
 	{
 		return new Renderer();
 	}
+
 }

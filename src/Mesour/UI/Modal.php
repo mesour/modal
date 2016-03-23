@@ -184,7 +184,7 @@ class Modal extends Mesour\Components\Control\AttributesControl
 				$oldWrapper->attrs[$key] = clone $attr;
 			}
 		}
-		
+
 		$this->onBeforeRender($this, $wrapper);
 
 		$rendererFactory = $this->getRendererFactory();

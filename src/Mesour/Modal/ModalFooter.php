@@ -48,7 +48,7 @@ class ModalFooter extends Mesour\Components\Control\AttributesControl
 	}
 
 	/**
-	 * @param $name
+	 * @param string $name
 	 * @return Mesour\UI\Button
 	 */
 	public function addButton($name)

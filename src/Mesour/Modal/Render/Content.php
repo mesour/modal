@@ -9,9 +9,7 @@
 
 namespace Mesour\Modal\Render;
 
-use Mesour\Modal\ModalHeader;
-use Mesour\Modal\ModalBody;
-use Mesour\Modal\ModalFooter;
+use Mesour\Modal;
 
 /**
  * @author Matouš Němec <http://mesour.com>
@@ -20,31 +18,31 @@ abstract class Content extends Attributes
 {
 
 	/**
-	 * @var ModalHeader
+	 * @var Modal\ModalHeader
 	 */
 	protected $header;
 
 	/**
-	 * @var ModalBody
+	 * @var Modal\ModalBody
 	 */
 	protected $body;
 
 	/**
-	 * @var ModalFooter
+	 * @var Modal\ModalFooter
 	 */
 	protected $footer;
 
-	public function setHeader(ModalHeader $header)
+	public function setHeader(Modal\ModalHeader $header)
 	{
 		$this->header = $header;
 	}
 
-	public function setBody(ModalBody $body)
+	public function setBody(Modal\ModalBody $body)
 	{
 		$this->body = $body;
 	}
 
-	public function setFooter(ModalFooter $footer)
+	public function setFooter(Modal\ModalFooter $footer)
 	{
 		$this->footer = $footer;
 	}
