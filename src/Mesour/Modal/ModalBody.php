@@ -10,6 +10,7 @@
 namespace Mesour\Modal;
 
 use Mesour;
+use Nette\Utils\Strings;
 
 /**
  * @author Matouš Němec (http://mesour.com)
@@ -21,6 +22,10 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 {
 
 	const WRAPPER = 'wrapper';
+
+	private $ajaxLoading = false;
+
+	private $cached = false;
 
 	public $onRender = [];
 
@@ -46,6 +51,23 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 		);
 	}
 
+	public function setAjaxLoading($ajaxLoading = true)
+	{
+		$this->ajaxLoading = $ajaxLoading;
+		return $this;
+	}
+
+	public function setCached($cached = true)
+	{
+		$this->cached = $cached;
+		return $this;
+	}
+
+	public function hasAjaxLoading()
+	{
+		return $this->ajaxLoading;
+	}
+
 	/**
 	 * @return Mesour\Components\Utils\Html
 	 */
@@ -66,14 +88,61 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 			}
 		}
 
-		foreach ($this->getComponents() as $component) {
-			$wrapper->add($component->create());
+		if ($this->ajaxLoading) {
+			$application = $this->lookup(Mesour\Components\Application\IApplication::class, false, true);
+			if (!$application) {
+				throw new Mesour\InvalidStateException(
+					sprintf(
+						'If use ajax loading, modal component must be attached to %s.',
+						Mesour\UI\Application::class
+					)
+				);
+			}
 		}
+
+		$wrapper->addAttributes(
+			[
+				'data-ajax-loading' => $this->ajaxLoading ? $this->createLinkName() : 'false',
+				'data-is-cached' => $this->cached ? 'true' : 'false',
+			]
+		);
+
+		$wrapper->add($this->getContent());
 
 		$this->onRender($this);
 
 		$this->setHtmlElement($oldWrapper);
 		return $wrapper;
+	}
+
+	public function handleGetContent()
+	{
+		ob_clean();
+		ob_start();
+		echo $this->getContent(true);
+		$out = ob_get_contents();
+		ob_end_clean();
+		echo trim($out);
+		exit(0);
+	}
+
+	private function getContent($isAjax = false)
+	{
+		$out = '';
+
+		/** @var Mesour\UI\Control[] $components */
+		$components = array_values($this->getComponents());
+		$count = count($components);
+		foreach ($components as $key => $component) {
+			$output = (string) $component->create($isAjax);
+			if (Strings::length($output) > 0) {
+				$out .= $output;
+				if ($count !== $key + 1) {
+					$out .= ' ';
+				}
+			}
+		}
+		return $out;
 	}
 
 }

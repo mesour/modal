@@ -79,6 +79,42 @@ class Modal extends Mesour\Components\Control\AttributesControl
 	}
 
 	/**
+	 * @param string $name
+	 * @return Mesour\Modal\Contents\StringContent
+	 */
+	public function addStringContent($name)
+	{
+		$stringContent = new Mesour\Modal\Contents\StringContent($name);
+		$this->getModalBody()->addComponent($stringContent);
+		return $stringContent;
+	}
+
+	/**
+	 * @param string $name
+	 * @param string $file
+	 * @return Mesour\Modal\Contents\TemplateContent
+	 */
+	public function addTemplateContent($name, $file)
+	{
+		$templateContent = new Mesour\Modal\Contents\TemplateContent($name);
+		$templateContent->setFile($file);
+		$this->getModalBody()->addComponent($templateContent);
+		return $templateContent;
+	}
+
+	public function setAjaxLoading($ajaxLoading = true)
+	{
+		$this->getModalBody()->setAjaxLoading($ajaxLoading);
+		return $this;
+	}
+
+	public function setCached($cached = true)
+	{
+		$this->getModalBody()->setCached($cached);
+		return $this;
+	}
+
+	/**
 	 * @return Mesour\Components\Utils\Html
 	 */
 	public function getControlPrototype()
@@ -210,7 +246,8 @@ class Modal extends Mesour\Components\Control\AttributesControl
 		$wrapper->addAttributes(
 			[
 				'data-mesour-modal' => $this->createLinkName(),
-				'data-show' => $this->showed ? 'true' : 'false',
+				'data-show' => 'false',
+				'data-mesour-show' => $this->showed ? 'true' : 'false',
 				'data-keyboard' => $this->keyboard ? 'true' : 'false',
 				'data-backdrop' => $this->backdrop ? 'true' : 'false',
 			]

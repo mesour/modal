@@ -20,17 +20,62 @@ require_once SRC_DIR . 'Mesour/Modal/Render/Html/Content.php';
 require_once SRC_DIR . 'Mesour/Modal/Render/Html/Renderer.php';
 require_once SRC_DIR . 'Mesour/Modal/Render/Html/RendererFactory.php';
 
+require_once SRC_DIR . 'Mesour/Modal/Contents/AbstractContent.php';
+require_once SRC_DIR . 'Mesour/Modal/Contents/StringContent.php';
+require_once SRC_DIR . 'Mesour/Modal/Contents/TemplateContent.php';
+
 require_once SRC_DIR . 'Mesour/Modal/CloseButton.php';
 require_once SRC_DIR . 'Mesour/Modal/ModalHeader.php';
 require_once SRC_DIR . 'Mesour/Modal/ModalBody.php';
 require_once SRC_DIR . 'Mesour/Modal/ModalFooter.php';
 require_once SRC_DIR . 'Mesour/UI/Modal.php';
 
-$modal = new \Mesour\UI\Modal('testModal');
+// APPLICATION
+
+$application = new \Mesour\UI\Application('mesourApp');
+
+$application->setRequest($_REQUEST);
+
+$application->run();
+
+// MODAL
+
+$modal = new \Mesour\UI\Modal('testModal', $application);
 
 $modal->setTitle('Test modal');
 
+$modal->addStringContent('test')
+	->setCallback(
+		function (\Mesour\Modal\Contents\StringContent $content) {
+			return 'test content<br>';
+		}
+	);
+
+$modal->addStringContent('test2')
+	->setCallback(
+		function (\Mesour\Modal\Contents\StringContent $content) {
+			return 'test content 2<br>';
+		}
+	);
+
+$modal->addTemplateContent('test3', __DIR__ . '/template.latte')
+	->setTempDir(__DIR__ . '/tmp')
+	->setBlock('first')
+	->setCallback(
+		function (\Mesour\Modal\Contents\TemplateContent $content, \Mesour\UI\TemplateFile $template) {
+			$template->foo = 'foo variable content';
+		}
+	);
+
+$modal->addTemplateContent('test4', __DIR__ . '/template.latte')
+	->setTempDir(__DIR__ . '/tmp')
+	->setBlock('second');
+
 $modal->showModal();
+
+$modal->setAjaxLoading();
+
+$modal->setCached();
 
 $modal->getModalFooter()->addButton('testButton')
 	->setType('primary')
