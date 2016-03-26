@@ -12,7 +12,7 @@
     "php": ">=5.5.0",
     "mesour/components": "3.0.*@beta",
     "mesour/button": "3.0.*@beta",
-    "mesour/template": "dev-master"
+    "mesour/template": "~3.0.0"
   },
   "require-dev": {
     "tracy/tracy": "~2.3.0",
