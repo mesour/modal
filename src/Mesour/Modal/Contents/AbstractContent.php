@@ -17,7 +17,7 @@ use Mesour;
  * @method Mesour\UI\Control[] getComponents()
  * @method Mesour\Modal\ModalBody getParent()
  */
-abstract class AbstractContent extends Mesour\Components\Control\AttributesControl
+abstract class AbstractContent extends Mesour\UI\Control
 {
 
 	public $onRender = [];
