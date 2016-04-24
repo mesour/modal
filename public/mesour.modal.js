@@ -36,6 +36,10 @@ mesour.modal = !mesour.modal ? {} : mesour.modal;
             });
         };
 
+        this.delete = function (modal) {
+            delete modals[modal];
+        };
+
         this.getModal = function (modal) {
             return getModal(modal);
         };

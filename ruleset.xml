@@ -57,6 +57,6 @@
             <property name="spacing" value="1"/>
         </properties>
     </rule>
-    <exclude-pattern>app/config/environment.php</exclude-pattern>
+    <exclude-pattern>tests/environment.php</exclude-pattern>
     <exclude-pattern>tests/bootstrap.php</exclude-pattern>
 </ruleset>

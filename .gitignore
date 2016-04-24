@@ -3,3 +3,7 @@
 /composer.lock
 /examples/log
 /examples/tmp
+/tests/tmp
+/tests/log
+/tests/environment.php
+/tests/Mesour/ModalTests/output
