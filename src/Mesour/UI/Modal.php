@@ -22,9 +22,7 @@ class Modal extends Mesour\Components\Control\AttributesControl
 {
 
 	const WRAPPER = 'wrapper';
-
 	const DIALOG = 'dialog';
-
 	const CONTENT = 'content';
 
 	private $disabled = false;

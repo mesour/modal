@@ -103,9 +103,7 @@ echo $modal->render();
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 		crossorigin="anonymous"></script>
 
-<script src="../vendor/mesour/components/public/mesour.components.js"></script>
-
-<script src="../public/mesour.modal.min.js"></script>
+<script src="../node_modules/mesour-modal/dist/mesour.modal.min.js"></script>
 
 <script>
 	$(function () {

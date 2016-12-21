@@ -20,12 +20,11 @@ use Mesour;
 class ModalHeader extends Mesour\Components\Control\AttributesControl
 {
 
+	use Mesour\Components\Localization\Translatable;
+
 	const WRAPPER = 'wrapper';
-
 	const TITLE = 'title';
-
 	const CLOSE = 'close';
-
 	private $title;
 
 	/**
