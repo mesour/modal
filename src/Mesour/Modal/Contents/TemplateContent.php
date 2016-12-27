@@ -95,7 +95,7 @@ class TemplateContent extends AbstractContent
 			if (!$configTempDir) {
 				throw new Mesour\InvalidStateException('Temp dir is required.');
 			}
-			$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $configTempDir);
+			$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $configTempDir, $this->getTranslator());
 		}
 		if (!$this->file) {
 			throw new Mesour\InvalidStateException('Template file is required. User setFile.');

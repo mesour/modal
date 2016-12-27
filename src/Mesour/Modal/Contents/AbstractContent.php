@@ -30,4 +30,9 @@ abstract class AbstractContent extends Mesour\UI\Control
 		$this->callback = $callback;
 	}
 
+	public function getTranslator()
+	{
+		return $this->getApplication()->getTranslator();
+	}
+
 }
