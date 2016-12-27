@@ -34,9 +34,13 @@ class TemplateContent extends AbstractContent
 	 */
 	private $templateFile;
 
+	/**
+	 * @param string $tempDir
+	 * @deprecated
+	 */
 	public function setTempDir($tempDir)
 	{
-		$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $tempDir);
+		trigger_error('Deprecated. Use $application->getConfiguration()->setTempDir($tempDir) instead.', E_USER_DEPRECATED);
 		return $this;
 	}
 
@@ -87,7 +91,11 @@ class TemplateContent extends AbstractContent
 	protected function getTemplateFile()
 	{
 		if (!$this->templateFile) {
-			throw new Mesour\InvalidStateException('Temp dir is required. User setTempDir.');
+			$configTempDir = $this->getApplication()->getConfiguration()->getTempDir();
+			if (!$configTempDir) {
+				throw new Mesour\InvalidStateException('Temp dir is required.');
+			}
+			$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $configTempDir);
 		}
 		if (!$this->file) {
 			throw new Mesour\InvalidStateException('Template file is required. User setFile.');

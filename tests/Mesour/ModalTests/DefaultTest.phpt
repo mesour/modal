@@ -18,6 +18,9 @@ class DefaultTest extends BaseTestCase
 
 		$application->setRequest($_REQUEST);
 
+		$application->getConfiguration()
+			->setTempDir(__DIR__ . '/tmp');
+
 		$application->run();
 
 		// MODAL
@@ -41,7 +44,6 @@ class DefaultTest extends BaseTestCase
 			);
 
 		$modal->addTemplateContent('test3', __DIR__ . '/template.latte')
-			->setTempDir(__DIR__ . '/tmp')
 			->setBlock('first')
 			->setCallback(
 				function (\Mesour\Modal\Contents\TemplateContent $content, \Mesour\UI\TemplateFile $template) {
@@ -50,7 +52,6 @@ class DefaultTest extends BaseTestCase
 			);
 
 		$modal->addTemplateContent('test4', __DIR__ . '/template.latte')
-			->setTempDir(__DIR__ . '/tmp')
 			->setBlock('second');
 
 		$modal->showModal();

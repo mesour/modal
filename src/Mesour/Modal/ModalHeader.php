@@ -25,6 +25,7 @@ class ModalHeader extends Mesour\Components\Control\AttributesControl
 	const WRAPPER = 'wrapper';
 	const TITLE = 'title';
 	const CLOSE = 'close';
+
 	private $title;
 
 	/**
