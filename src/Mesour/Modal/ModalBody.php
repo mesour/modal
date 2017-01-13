@@ -34,7 +34,7 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 			'el' => 'div',
 			'attributes' => [
 				'class' => 'modal-body',
-				'mesour-modal-body' => 'true',
+				'data-mesour-modal-body' => 'true',
 			],
 		],
 	];
