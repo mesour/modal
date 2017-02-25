@@ -2,7 +2,7 @@
 /**
  * This file is part of the Mesour Modal (http://components.mesour.com/component/modal)
  *
- * Copyright (c) 2016 Matouš Němec (http://mesour.com)
+ * Copyright (c) 2017 Matouš Němec (http://mesour.com)
  *
  * For full licence and copyright please view the file licence.md in root of this project
  */
@@ -34,7 +34,7 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 			'el' => 'div',
 			'attributes' => [
 				'class' => 'modal-body',
-				'mesour-modal-body' => 'true',
+				'data-mesour-modal-body' => 'true',
 			],
 		],
 	];
@@ -117,7 +117,9 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 
 	public function handleGetContent()
 	{
-		ob_clean();
+		if (ob_get_contents()) {
+			ob_clean();
+		}
 		ob_start();
 		echo $this->getContent(true);
 		$out = ob_get_contents();
@@ -126,7 +128,7 @@ class ModalBody extends Mesour\Components\Control\AttributesControl
 		exit(0);
 	}
 
-	private function getContent($isAjax = false)
+	public function getContent($isAjax = false)
 	{
 		$out = '';
 

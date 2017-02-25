@@ -2,7 +2,7 @@
 /**
  * This file is part of the Mesour Modal (http://components.mesour.com/component/button)
  *
- * Copyright (c) 2016 Matouš Němec (http://mesour.com)
+ * Copyright (c) 2017 Matouš Němec (http://mesour.com)
  *
  * For full licence and copyright please view the file licence.md in root of this project
  */
@@ -20,10 +20,10 @@ use Mesour;
 class ModalHeader extends Mesour\Components\Control\AttributesControl
 {
 
+	use Mesour\Components\Localization\Translatable;
+
 	const WRAPPER = 'wrapper';
-
 	const TITLE = 'title';
-
 	const CLOSE = 'close';
 
 	private $title;

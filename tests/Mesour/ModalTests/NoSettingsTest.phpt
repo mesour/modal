@@ -7,7 +7,7 @@ use Tester\Assert;
 require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/BaseTestCase.php';
 
-class DefaultTest extends BaseTestCase
+class NoSettingsTest extends BaseTestCase
 {
 
 	public function testDefault()
@@ -43,29 +43,13 @@ class DefaultTest extends BaseTestCase
 				}
 			);
 
-		$modal->addTemplateContent('test3', __DIR__ . '/template.latte')
-			->setBlock('first')
-			->setCallback(
-				function (\Mesour\Modal\Contents\TemplateContent $content, \Mesour\UI\TemplateFile $template) {
-					$template->foo = 'foo variable content';
-				}
-			);
-
-		$modal->addTemplateContent('test4', __DIR__ . '/template.latte')
+		$modal->addTemplateContent('test4', __DIR__ . '/data/template.latte')
 			->setBlock('second');
 
-		$modal->showModal();
-
-		$modal->setAjaxLoading();
-
-		$modal->setCached();
-
-		$modal->getModalFooter()->addButton('testButton')
-			->setType('primary')
-			->setText('Save');
+		$modal->getModalFooter()->disableCloseButton();
 
 		Assert::same(
-			file_get_contents(__DIR__ . '/data/DefaultTestOutput.html'),
+			file_get_contents(__DIR__ . '/data/NoSettingsTestOutput.html'),
 			(string) $modal->render(),
 			'Output of modal render doest not match'
 		);
@@ -73,5 +57,5 @@ class DefaultTest extends BaseTestCase
 
 }
 
-$test = new DefaultTest();
+$test = new NoSettingsTest();
 $test->run();

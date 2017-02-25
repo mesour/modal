@@ -2,7 +2,7 @@
 /**
  * This file is part of the Mesour Modal (http://components.mesour.com/component/modal)
  *
- * Copyright (c) 2016 Matouš Němec (http://mesour.com)
+ * Copyright (c) 2017 Matouš Němec (http://mesour.com)
  *
  * For full licence and copyright please view the file licence.md in root of this project
  */
@@ -34,9 +34,13 @@ class TemplateContent extends AbstractContent
 	 */
 	private $templateFile;
 
+	/**
+	 * @param string $tempDir
+	 * @deprecated
+	 */
 	public function setTempDir($tempDir)
 	{
-		$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $tempDir);
+		trigger_error('Deprecated. Use $application->getConfiguration()->setTempDir($tempDir) instead.', E_USER_DEPRECATED);
 		return $this;
 	}
 
@@ -87,7 +91,11 @@ class TemplateContent extends AbstractContent
 	protected function getTemplateFile()
 	{
 		if (!$this->templateFile) {
-			throw new Mesour\InvalidStateException('Temp dir is required. User setTempDir.');
+			$configTempDir = $this->getApplication()->getConfiguration()->getTempDir();
+			if (!$configTempDir) {
+				throw new Mesour\InvalidStateException('Temp dir is required.');
+			}
+			$this->templateFile = new Mesour\UI\TemplateFile($this->getEngine(), $configTempDir, $this->getTranslator());
 		}
 		if (!$this->file) {
 			throw new Mesour\InvalidStateException('Template file is required. User setFile.');

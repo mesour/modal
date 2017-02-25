@@ -36,6 +36,9 @@ $application = new \Mesour\UI\Application('mesourApp');
 
 $application->setRequest($_REQUEST);
 
+$application->getConfiguration()
+	->setTempDir(__DIR__ . '/tmp');
+
 $application->run();
 
 // MODAL
@@ -59,7 +62,6 @@ $modal->addStringContent('test2')
 	);
 
 $modal->addTemplateContent('test3', __DIR__ . '/template.latte')
-	->setTempDir(__DIR__ . '/tmp')
 	->setBlock('first')
 	->setCallback(
 		function (\Mesour\Modal\Contents\TemplateContent $content, \Mesour\UI\TemplateFile $template) {
@@ -68,7 +70,6 @@ $modal->addTemplateContent('test3', __DIR__ . '/template.latte')
 	);
 
 $modal->addTemplateContent('test4', __DIR__ . '/template.latte')
-	->setTempDir(__DIR__ . '/tmp')
 	->setBlock('second');
 
 $modal->showModal();
@@ -103,9 +104,7 @@ echo $modal->render();
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 		crossorigin="anonymous"></script>
 
-<script src="../vendor/mesour/components/public/mesour.components.js"></script>
-
-<script src="../public/mesour.modal.min.js"></script>
+<script src="../node_modules/mesour-modal/dist/mesour.modal.min.js"></script>
 
 <script>
 	$(function () {

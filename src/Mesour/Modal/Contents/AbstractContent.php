@@ -2,7 +2,7 @@
 /**
  * This file is part of the Mesour Modal (http://components.mesour.com/component/modal)
  *
- * Copyright (c) 2016 Matouš Němec (http://mesour.com)
+ * Copyright (c) 2017 Matouš Němec (http://mesour.com)
  *
  * For full licence and copyright please view the file licence.md in root of this project
  */
@@ -28,6 +28,11 @@ abstract class AbstractContent extends Mesour\UI\Control
 	{
 		Mesour\Components\Utils\Helpers::checkCallback($callback);
 		$this->callback = $callback;
+	}
+
+	public function getTranslator()
+	{
+		return $this->getApplication()->getTranslator();
 	}
 
 }
